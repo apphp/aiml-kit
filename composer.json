@@ -15,11 +15,11 @@
   },
   "autoload": {
     "psr-4": {
-      "Apphp\\ML\\": "src/"
+      "Apphp\\MLKit\\": "src/"
     },
     "autoload-dev": {
       "psr-4": {
-        "Apphp\\ML\\Tests\\": "tests/"
+        "Apphp\\MLKit\\Tests\\": "tests/"
       }
     }
   }

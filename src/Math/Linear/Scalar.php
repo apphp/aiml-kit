@@ -1,6 +1,6 @@
 <?php
 
-namespace Apphp\ML\Math\Linear;
+namespace Apphp\MLKit\Math\Linear;
 
 class Scalar
 {
