@@ -20,9 +20,14 @@ class Scalar {
      *
      * @param float $a First number
      * @param float $b Second number
+     * @param int|null $precision Number of decimal places to round to.
      * @return float Sum of the two numbers
      */
-    public static function add(float $a, float $b): float {
+    public static function add(float $a, float $b, ?int $precision = 10): float {
+        if ($precision !== null) {
+            return round($a + $b, $precision);
+        }
+
         return $a + $b;
     }
 
@@ -64,9 +69,14 @@ class Scalar {
      *
      * @param float $a Dividend
      * @param float $b Divisor
+     * @param int|null $precision Number of decimal places to round to.
      * @return float Remainder of the division
      */
-    public static function modulus(float $a, float $b): float {
+    public static function modulus(float $a, float $b, ?int $precision = 10): float {
+        if ($precision !== null) {
+            return round(fmod($a, $b), $precision);
+        }
+
         return fmod($a, $b);
     }
 
@@ -177,9 +187,14 @@ class Scalar {
      * Calculates the sine of an angle
      *
      * @param float $angle Angle in radians
+     * @param int|null $precision Number of decimal places to round to.
      * @return float Sine value
      */
-    public static function sine(float $angle): float {
+    public static function sine(float $angle, ?int $precision = 10): float {
+        if ($precision !== null) {
+            return round(sin($angle), $precision);
+        }
+
         return sin($angle);
     }
 
@@ -187,9 +202,14 @@ class Scalar {
      * Calculates the cosine of an angle
      *
      * @param float $angle Angle in radians
+     * @param int|null $precision Number of decimal places to round to.
      * @return float Cosine value
      */
-    public static function cosine(float $angle): float {
+    public static function cosine(float $angle, ?int $precision = 10): float {
+        if ($precision !== null) {
+            return round(cos($angle), $precision);
+        }
+
         return cos($angle);
     }
 
@@ -197,10 +217,22 @@ class Scalar {
      * Calculates the tangent of an angle
      *
      * @param float $angle Angle in radians
-     * @return float Tangent value
+     * @param int|null $precision Number of decimal places to round to.
+     * @return float|string Returns 'undefined' for angles where tangent is undefined (π/2 + nπ)
      */
-    public static function tangent(float $angle): float {
-        return tan($angle);
+    public static function tangent(float $angle, ?int $precision = 10): float|string {
+        // Check if angle is π/2 + nπ where tangent is undefined
+        $normalized = fmod($angle, M_PI); // Normalize to [0, π]
+        if (abs($normalized - M_PI_2) < 0.00000001) {
+            return 'undefined';
+        }
+
+        $result = tan($angle);
+        if ($precision !== null) {
+            return round($result, $precision);
+        }
+
+        return $result;
     }
 
     /**
