@@ -1,5 +1,5 @@
 {
-  "name": "PHP-ML SDK",
+  "name": "apphp/ml-kit",
   "description": "PHP-ML - SDK designed to bring AI and Machine Learning capabilities to PHP.",
   "version": "0.0.1",
   "license": "MIT",
@@ -13,14 +13,21 @@
   "require": {
     "php": "~8.2.0"
   },
+  "require-dev": {
+    "phpunit/phpunit": "^10.4"
+  },
   "autoload": {
     "psr-4": {
       "Apphp\\MLKit\\": "src/"
-    },
-    "autoload-dev": {
-      "psr-4": {
-        "Apphp\\MLKit\\Tests\\": "tests/"
-      }
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Apphp\\MLKit\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": "phpunit",
+    "test:coverage": "phpunit --coverage-html coverage"
   }
 }
